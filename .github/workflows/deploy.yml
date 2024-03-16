@@ -14,10 +14,10 @@ jobs:
       uses: actions/checkout@v2
 
     - name: SSH into DigitalOcean server and update code
-      uses: sudofruit/ssh-action@master
+      uses: appleboy/ssh-action@master
       with:
-        host: ${{ 206.189.143.118 }}
-        username: ${{ tapseed }}
+        host: ${{ secrets.DIGITALOCEAN_SERVER_IP }} 
+        username: tapseed                           
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
           cd /var/www/access.tapseed.in/html
