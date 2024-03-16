@@ -1,0 +1,26 @@
+name: Deploy to DigitalOcean
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: SSH into DigitalOcean server and update code
+      uses: sudofruit/ssh-action@master
+      with:
+        host: ${{ 206.189.143.118 }}
+        username: ${{ tapseed }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          cd /var/www/access.tapseed.in/html
+          git pull origin main
+          # Additional steps like restarting the server, rebuilding assets, etc.
+
