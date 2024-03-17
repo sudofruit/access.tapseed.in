@@ -11,13 +11,13 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v2   # No specific Node.js version specified
 
     - name: SSH into DigitalOcean server and update code
       uses: appleboy/ssh-action@master
       with:
-        host: ${{ secrets.DIGITALOCEAN_SERVER_IP }} 
-        username: tapseed                           
+        host: ${{ secrets.DIGITALOCEAN_SERVER_IP }}
+        username: tapseed
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
           cd /var/www/access.tapseed.in/html
