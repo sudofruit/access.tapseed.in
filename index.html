@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sales</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 800px;
+        margin: 50px auto;
+        text-align: center;
+      }
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+        margin: 10px;
+        cursor: pointer;
+        display: block;
+        width: 100%;
+      }
+      #whatsappSection {
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        margin-top: 30px;
+      }
+      input[type="text"],
+      input[type="number"] {
+        padding: 10px;
+        font-size: 16px;
+        margin: 10px;
+        width: calc(100% - 22px); /* Adjusting for padding */
+      }
+      select {
+        padding: 10px;
+        font-size: 16px;
+        margin: 10px;
+        width: calc(100% - 22px); /* Adjusting for padding */
+      }
+      #sendButton {
+        width: calc(100% - 22px); /* Adjusting for padding */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <button id="button1">Register Account</button>
+      <button id="button2">Record an appointment</button>
+
+      <div id="whatsappSection">
+        <input type="text" id="nameInput" placeholder="Your Name" />
+        <input type="number" id="phoneInput" placeholder="Enter Phone Number" />
+        <select id="productSelect">
+          <option value="">Select Product</option>
+          <option value="Smart Google Review Card">
+            Smart Google Review Card
+          </option>
+          <option value="Smart NFC Business Card">
+            Smart NFC Business Card
+          </option>
+          <option value="Smart NFC Standee">Smart NFC Standee</option>
+        </select>
+        <select id="salesPersonSelect">
+          <option value="">Select Sales Person</option>
+          <option value="Sayooj Shagra">Sayooj Shagra</option>
+          <option value="Adithyan P">Adithyan P</option>
+        </select>
+        <button id="sendButton">Send WhatsApp Message</button>
+      </div>
+    </div>
+
+    <script>
+      // Object to store Google Form links for each product
+      var productLinks = {
+        "Smart Google Review Card": "https://forms.gle/gC2zTTFwMsNZJgsN7",
+        "Smart NFC Business Card": "https://forms.gle/BS5eaTdXZ8iY7dg38",
+        "Smart NFC Business Card": "https://forms.gle/vSfZE4chCR67FAQ49",
+      };
+
+      document.getElementById("button1").addEventListener("click", function () {
+        window.open("/regestration/index.html", "_blank");
+      });
+      document.getElementById("button2").addEventListener("click", function () {
+        window.open("https://forms.gle/EjY7m54WaDdSCCPU6", "_blank");
+      });
+
+      document
+        .getElementById("sendButton")
+        .addEventListener("click", function () {
+          var name = document.getElementById("nameInput").value;
+          var phoneNumber = document.getElementById("phoneInput").value;
+          var selectedProduct = document.getElementById("productSelect").value;
+          var selectedSalesPerson =
+            document.getElementById("salesPersonSelect").value;
+
+          if (
+            phoneNumber !== "" &&
+            selectedProduct !== "" &&
+            selectedSalesPerson !== ""
+          ) {
+            if (selectedProduct in productLinks) {
+              var formLink = productLinks[selectedProduct];
+              var message =
+                "Hello " +
+                name +
+                "!\n\n" +
+                "Welcome aboard and thank you for your interest in our " +
+                selectedProduct +
+                " here at Tapseed!  We're thrilled to have you join our community of satisfied customers.\n\n" +
+                "To ensure we tailor our services perfectly to your needs, could you kindly take a moment to fill out this Google Form? Your input will help us provide you with the best experience possible.\n\n" +
+                "Here's the link to the form: " +
+                formLink +
+                "\n\n" +
+                "If you have any questions or need assistance, please don't hesitate to reach out. We're here to make your journey with us seamless and enjoyable!\n\n" +
+                "Best regards,\n" +
+                selectedSalesPerson +
+                "\ntapseed";
+              var url =
+                "https://wa.me/" +
+                phoneNumber +
+                "?text=" +
+                encodeURIComponent(message);
+              window.open(url, "_blank");
+            }
+          } else {
+            alert("Please fill in all fields.");
+          }
+        });
+    </script>
+  </body>
+</html>
